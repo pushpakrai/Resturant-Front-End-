@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;1,6..72,300&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #DFBF66;
+    --deep: #0A0A0A; /* Midnight Obsidian */
+    --deep-accent: #141414;
+    --cream: #F5F1E6; /* Champagne Cream */
+    --ivory: #FAF9F6;
+    --wine: #6B1F2A;
+  }
+
+  html { 
+    scroll-behavior: smooth; 
+    cursor: default;
+    background-color: var(--deep);
+  }
+
+  body {
+    @apply bg-ivory text-deep antialiased overflow-x-hidden dark:bg-deep dark:text-cream transition-colors duration-700;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: 'Newsreader', serif;
+    font-weight: 300;
+  }
+}
+
+@layer components {
+  .btn-gold {
+    @apply bg-gold text-deep px-8 py-4 uppercase tracking-[0.2em] text-[10px] font-bold transition-all duration-500 hover:bg-gold-light hover:scale-105 shadow-lg active:scale-95;
+  }
+
+  .glass-panel {
+    @apply bg-white/75 backdrop-blur-xl border border-gold/25 shadow-2xl dark:bg-black/40 dark:border-gold/20;
+  }
+
+  .nav-link {
+    @apply text-deep/65 hover:text-gold dark:text-cream/70 dark:hover:text-gold transition-all duration-300 text-[10px] uppercase tracking-[0.25em] relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all hover:after:w-full;
+  }
+
+  .premium-card {
+    @apply bg-white/95 border border-gold/25 hover:border-gold/45 transition-all duration-700 overflow-hidden relative dark:bg-deep-accent dark:border-gold/10 dark:hover:border-gold/30;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--deep);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-light);
+}
+
+/* Parallax Utilities */
+.parallax-bg {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Section Transitions */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s ease-out;
+}
+.reveal-up.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes pulse-gold {
+  0% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.4); }
+  70% { box-shadow: 0 0 0 15px rgba(201, 168, 76, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
+}
+
+.animate-pulse-gold {
+  animation: pulse-gold 2s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse-gold {
+    animation: none;
+  }
+}
+
+/* PremiumImage loading shimmer */
+@keyframes premium-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.premium-img-shimmer {
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(201, 168, 76, 0.12) 45%,
+    rgba(223, 191, 102, 0.35) 50%,
+    rgba(201, 168, 76, 0.12) 55%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: premium-shimmer 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .premium-img-shimmer {
+    animation: none;
+    opacity: 0.4;
+  }
+}
