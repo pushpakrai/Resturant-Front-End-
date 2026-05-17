@@ -5,7 +5,7 @@ services:
     region: singapore
     plan: free
     branch: main
-    buildCommand: npm install && npm run build
+    buildCommand: npm install --legacy-peer-deps && npm run build
     staticPublishPath: ./dist
     routes:
       - type: rewrite
@@ -13,4 +13,4 @@ services:
         destination: /index.html
     envVars:
       - key: VITE_API_URL
-        sync: false  # Set to your backend Render URL: https://diamond-queen-backend.onrender.com/api
+        value: https://restaurant-back-end-ksi0.onrender.com/api  # Your live backend
