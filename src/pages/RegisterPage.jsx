@@ -21,7 +21,7 @@ export default function RegisterPage() {
       toast.success("Welcome to the Diamond Elite.");
       navigate('/');
     } catch (e) {
-      if (e.response?.data?.errors && e.response.data.errors.length > 0) {
+      if (e.response?.data?.errors) {
         toast.error(e.response.data.errors[0].msg);
       } else {
         toast.error(e.response?.data?.message || "Membership registry is momentarily full.");
